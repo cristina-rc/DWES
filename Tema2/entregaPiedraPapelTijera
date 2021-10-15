@@ -1,0 +1,78 @@
+<?php
+
+define ('PIEDRAIZDA', "&#x1F91C;");
+define ('PIEDRADCHA', "&#x1F91B;");
+define ('PAPEL', "&#x1F91A;");
+define ('TIJERA', "&#x1F596;");
+
+$jugador1 = random_int(1, 3);
+$jugador2 = random_int(1, 3);
+
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p{
+            font-size: 75pt;
+        }
+
+    </style>
+</head>
+<body>
+
+<?php
+
+echo "<font size='6'><b>¡Piedra, papel, tijera!</b></font></br></br>";
+echo "Actualice la página para mostrar otra partida.</br></br>";
+echo "<b>&nbsp;&nbsp;Jugador 1 &nbsp;&nbsp;Jugador 2";
+
+if($jugador1==1&&$jugador2==1){
+    echo "<p>".PIEDRAIZDA, PIEDRADCHA."</p>";
+    echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;¡Empate!";
+
+}elseif($jugador1==1&&$jugador2==2){
+    echo "<p>".PIEDRAIZDA, PAPEL."</p>";
+    echo "&nbsp;&nbsp;&nbsp;Ha ganado el jugador 2";
+
+}elseif($jugador1==1&&$jugador2==3){
+    echo "<p>".PIEDRAIZDA, TIJERA."</p>";
+    echo "&nbsp;&nbsp;&nbsp;Ha ganado el jugador 1";
+
+}elseif($jugador1==2&&$jugador2==1){
+    echo "<p>".PAPEL, PIEDRADCHA."</p>";
+    echo "&nbsp;&nbsp;&nbsp;Ha ganado el jugador 1";
+
+}elseif($jugador1==2&&$jugador2==2){
+    echo "<p>".PAPEL, PAPEL."</p>";
+    echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;¡Empate!";
+
+}elseif($jugador1==2&&$jugador2==3){
+    echo "<p>".PAPEL, TIJERA."</p>";
+    echo "&nbsp;&nbsp;&nbsp;Ha ganado el jugador 2";
+
+}elseif($jugador1==3&&$jugador2==1){
+    echo "<p>".TIJERA, PIEDRADCHA."</p>";
+    echo "&nbsp;&nbsp;&nbsp;Ha ganado el jugador 2";
+
+}elseif($jugador1==3&&$jugador2==2){
+    echo "<p>".TIJERA, PAPEL."</p>";
+    echo "&nbsp;&nbsp;&nbsp;Ha ganado el jugador 1";
+
+}elseif($jugador1==3&&$jugador2==3){
+    echo "<p>".TIJERA, TIJERA."</p>";
+    echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;¡Empate!";
+
+}
+
+?>
+
+    
+</body>
+</html>
