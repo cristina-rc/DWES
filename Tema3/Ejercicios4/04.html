@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<form action="04.php" method="GET">
+    <b>CAMPOS DE TEXTO: </b><br>
+    Nombre: <input type="text" name="nombre"><br>
+    Contraseña: <input type="password" name="contraseña">
+    <hr>
+    <b>RADIO:</b> <br>
+    <input type="radio" name="semaforo" value="Rojo" checked>Rojo<br>
+    <input type="radio" name="semaforo" value="Naranja">Naranja<br>
+    <input type="radio" name="semaforo" value="Verde">Verde<br>
+    <hr>
+    <b>CHECKBOX:</b><br>
+    Quiero recibir publicidad 
+    <input type="checkbox" name="publicidad"><br>
+    <b>MULTI CHECKBOX:</b><br>
+    <input type="checkbox" name="idiomas[]" value="ingles">Inglés
+    <input type="checkbox" name="idiomas[]" value="frances">Francés
+    <input type="checkbox" name="idiomas[]" value="aleman">Alemán
+    <hr>
+    <b>SELECT:</b><br>
+    <b>Simple:</b><br>
+    Año de finalización de estudios:
+    <select name = "anio">
+        <option>2012</option>
+        <option>2013</option>
+        <option>2014</option>
+        <option>2015</option>
+        <option>2016</option>
+        <option>2017</option>
+        <option>2018</option>
+        <option>2019</option>
+        <option>2020</option>
+    </select><br>
+    <b>Múltiple:</b><br>
+    Ciudades:
+    <select name = "ciudades[]" multiple size=4> 
+    <option>Asturias</option>
+    <option>Gerona</option>
+    <option>Madrid</option>
+    <option>Sevilla</option>
+    </select><br>
+    <hr>
+    <b>TEXTAREA:</b><br>
+    Escriba sus comentarios:
+    <textarea name="comentarios" rows="5" cols="30"></textarea><br>
+    <hr>
+    <b>BOTONES:</b><br>
+    <input type ="reset" name="limpiar" value="Resetear el formulario">
+    <input type = "submit" name="enviar" value="Enviar formulario al servidor">    
+
+</form>
+
+</body>
+</html>

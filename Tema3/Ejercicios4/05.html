@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="05.php" method="POST">
+        <b>Nombre:</b><input type="text" name="nombre"><br>
+        <b>Apellidos: </b><input type="text" name="apellidos"><br>
+        <b>Edad: </b><select name="edad">
+        <option>Menor de 18</option>
+        <option>Entre 18 y 55</option>
+        <option>Mayor de 55</option>
+        </select>
+        <br>
+        <b>Sexo: </b><input type="radio" name="sexo" value="hombre">Hombre
+        <input type="radio" name="sexo" value="mujer">Mujer<br>
+        <b>Hobbies:</b>
+        <br>
+        <input type="checkbox" name="hobbies[]" value="lectura">Lectura <br>
+        <input type="checkbox" name="hobbies[]" value="ver la tele">Ver la tele<br>
+        <input type="checkbox" name="hobbies[]" value="hacer deporte">Hacer deporte<br>
+        <input type="checkbox" name="hobbies[]" value="salir de marcha">Salir de marcha<br>
+        
+        <input type="submit" name="enviar" value="Enviar">
+    </form>
+</body>
+</html>

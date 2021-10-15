@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <fieldset>
+    <form action="03.php" method="GET">
+    
+    NUMERO 1 (number): <input type="number" name="numero1"><br><br>
+    NUMERO 2 (range [10-100]): 10 <input type="range" name="numero2" min="10" max="100" step="10"> 100<br><br>
+    ESTACIONES (list): <input list="estaciones" name="listaEstaciones">
+                            <datalist id="estaciones">
+                                <option value = "Otoño">
+                                <option value = "Invierno">
+                                <option value = "Primavera">
+                                <option value = "Verano">
+                            </datalist><br><br>
+    COLOR FAVORITO (color): <input type="color" name="color"><br><br>
+    BUSCAR (search): <input type="search" name="buscar"><br><br>
+    NOMBRE (text): <input type="text" name="nombre"><br><br>
+    APELLIDO (text): <input type="text" name="apellido"><br><br>
+    E-MAIL (email): <input type="email" name="email"><br><br>
+    FECHA DE NACIMIENTO (date): <input type="date" name="nacimiento"><br><br>
+    EDAD (number, de 10 a 150): <input type="number" name="edad" min="0" max="150"><br><br>
+    PAGINA PERSONAL (url): <input type="url" name="web"><br><br>
+    HORARIO: <input type="time" name="horaInicio"> a <input type="time" name="horaFin"><br><br>
+    
+    <input type="submit" value="Enviar consulta">
+    
+</fieldset>                         
+    </form>
+    
+</body>
+</html>
