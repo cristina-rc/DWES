@@ -1,0 +1,142 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+import java.io.*;
+import java.net.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+/**
+ * Servidor Multihilo TCP, hace eco de lo que recibe
+ */
+
+public class ServerMTCP {
+
+	public static void main(String args[]) {
+
+		// Establecemos el nÃºmero de puerto a utilizar.
+		int serverPort = 4444;
+
+		// Creamos una instancia para esperar las peticiones de los clientes.
+		ServerSocket listenSocket;
+
+		// Socket para conexiÃ³n.
+		Socket clientSocket;
+
+		// Usamos la clase conection.
+		Connection c;
+
+		try {
+
+			// Creamos el objeto para esperar peticiones de los clientes.
+			listenSocket = new ServerSocket(serverPort);
+
+			// CICLO DEL SERVIDOR
+			while (true) {
+
+				// Dejamos invocado el servidor esperando haste que un cliente
+				// se conecte. clientSocket = Socket nuevo para comunicaciones.
+				clientSocket = listenSocket.accept();
+				System.out.println(
+						" NUEVO CLIENTE: " + clientSocket.getInetAddress() + " PUERTO:" + clientSocket.getPort());
+				// Se establece la conexiÃ³n, y se vuelve a esperar un nuevo cliente.
+				c = new Connection(clientSocket);
+
+			}
+
+			// Control de excepciones.
+		} catch (IOException e) {
+			System.out.println("Error en socket: " + e.getMessage());
+		}
+	}
+}
+
+/**
+ * Hilo de ejecuciÃ³n que procesa cada una de la peticiones
+ */
+class Connection extends Thread {
+
+	// Instanciamos los flujos de datos de entrada y salida,y el socket para
+	// conexiÃ³n.
+	Socket clientSocket;
+	BufferedReader entrada = null;
+	PrintWriter salida = null;
+
+	// MÃ©todo que simula una versiÃ³n del programa Eliza, actuando como un servidor
+	// contestando a los mensajes que reciba por parÃ¡metro por parte del cliente
+	public static String procesarMensaje (String msg) {
+            
+            msg = msg.toUpperCase();
+            
+            HashMap<String, String> theliza= new HashMap<>();
+
+            // Asigno palabras clave a respuesta
+            theliza.put("HOLA","Hola, ¿qué tal?");
+            theliza.put("ENCANTADO","Encantado de conocerte yo también");
+            theliza.put("ADIOS","Adiós, espero volverte a ver pronto");
+            theliza.put("HORA", "Los siento no llevo reloj");
+            theliza.put("NOMBRE","Mi nombre es Eliza");
+            theliza.put("CACA","Creo que tu lenguaje no es adecuado");
+            String otro="Lo siento, no te comprendo.";
+            
+
+                    for(Map.Entry<String, String> entrada: theliza.entrySet()){
+                    // Si la linea contiene la entrada en la clave
+                            if(msg.contains(entrada.getKey())){
+                               return entrada.getValue();
+                            }
+                    }
+                    
+            return otro;
+        }
+
+
+	// Constructor.
+	public Connection(Socket aSocket) {
+
+		// Asocia el Socket(this) con el del cliente que conecta.
+		clientSocket = aSocket;
+
+		try {
+
+			// Creamos los flujos de entrada y salida de datos, y lo se los
+			// asociamos al socket cliente.
+			// Establece canal de entrada
+			entrada = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+			// Establece canal de salida
+			salida = new PrintWriter(new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream())), true);
+
+		} catch (IOException ex) {
+			System.out.println("Error en conexion: " + ex.getMessage());
+		}
+
+		// Lanzamos el mÃ©todo run.
+		this.start();
+	}
+
+	public void run() {
+
+		try {
+
+			while (true) {
+				// Recibe los datos mandados por el cliente.
+				String msg = entrada.readLine();
+				System.out.println("Cliente: " + msg);
+                                // Si el mensaje es de terminar	   
+                                if (msg.equals("Adios")) break;
+				// Ejecuta la respuesta
+				salida.println(">>" + procesarMensaje(msg));                               
+			}
+
+			// Control de excepciones.
+		} catch (Exception ex) {
+			System.err.println(" Fin / Error de conexiÃ³n." + clientSocket.getInetAddress() + "\n");
+		}
+	}
+}
