@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="ejeformulario1.php" method="GET"> <!--Con método POST no se muestra en la barra del navegador, con GET sí-->
+        NOMBRE: <input type="text" name="nombre"><br>
+        EDAD: <input type="number" name="valor"><br>
+
+        Marca o no marca: <input type="checkbox" name="casilla1"><br>
+
+        Botón radios:
+
+        Uno <input type="radio" name="opcion" value="1"> <!-- Sólo se puede seleccionar uno porque se llaman igual "opcion"-->
+        Dos <input type="radio" name="opcion" value="2">
+        Tres <input type="radio" name="opcion" value="3"><br>
+
+        COLOR:
+        <select name = "color">
+            <option>rojo</option>
+            <option>verde</option>
+            <option>azul</option>
+        </select><br>
+
+        COLORES:
+        <select name = "colores[]" multiple size=3> <!--Hay que indicar en selección multiple, que el nombre es un array-->
+            <option>rojo</option>
+            <option selected = "selected" value = "green">verde</option> <!--por defecto se selecciona el color verde, recibe "green"-->
+            <option>azul</option>
+            <option>amarillo</option>
+            <option>marron</option>
+        </select>
+
+        <input type="submit" value="Enviar">
+
+    </form>
+    
+</body>
+</html>
