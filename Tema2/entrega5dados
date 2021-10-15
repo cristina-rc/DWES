@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        h5{
+            font-size: 30px;
+        }
+
+        p{
+            font-size: 50pt;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<?php
+
+$dados = [
+
+    1 => "&#9856;",
+    2 => "&#9857;",
+    3 => "&#9858;",
+    4 => "&#9859;",
+    5 => "&#9860;",
+    6 => "&#9861;",
+    
+];
+
+
+$jugador1 = generarJugada($dados);
+$jugador2 = generarJugada($dados);
+
+$jugador1reduc = eliminarDados($jugador1);
+$jugador2reduc = eliminarDados($jugador2);
+
+$resultado1 = calcularResultado($jugador1reduc);
+$resultado2 = calcularResultado($jugador2reduc);
+
+$ganador = obtenerGanador($resultado1, $resultado2);
+
+pintarDados($dados, $jugador1, $jugador2, $jugador1reduc, $jugador2reduc, $resultado1, $resultado2, $ganador);
+
+
+function generarJugada($dados){
+
+    //Generamos una jugada con 5 tiradas aleatorias del dado
+    for($i = 1; $i < 6; $i++){
+        $jugada[$i] = array_rand($dados);
+    }
+
+    return $jugada;
+}
+
+function eliminarDados($jugada){
+
+    //Ordenamos los resultados de la jugada de menor a mayor
+
+    sort($jugada);
+
+    //Reducimos la jugada eliminando el menor y el mayor resultado (primera y última posición)
+
+    for($j = 1; $j < 4; $j++){
+        
+        $jugadaReducida[$j] = $jugada[$j];
+    }
+
+    return $jugadaReducida;
+}
+
+
+function calcularResultado($jugadorReduc){
+
+    //Sumamos el resultado de las 3 tiradas
+
+    $resultado = 0;
+
+    foreach ($jugadorReduc as $tirada){
+        $resultado+=$tirada;
+    }
+
+    return $resultado;
+}
+
+function obtenerGanador($resultado1, $resultado2){
+
+    //Obtenemos al ganador
+
+    if($resultado1 > $resultado2){
+        $ganador = "Ha ganado el jugador 1";
+
+    }elseif($resultado1==$resultado2){
+        $ganador = "Empate";
+
+    }else{
+        $ganador = "Ha ganado el jugador 2";
+    }
+
+    return $ganador;
+}
+
+
+function pintarDados($dados, $jugador1, $jugador2, $jugador1reduc, $jugador2reduc, $resultado1, $resultado2, $ganador){
+
+    //Dibujamos las tablas junto a los dados
+
+    echo "<h5>Cinco dados</h5> <br> Actualice la página para mostrar una nueva tirada";
+
+    echo "<table>";
+    
+    echo    "<tr><b>";
+    echo        "<td><b>Jugador 1</b></td>";
+    echo        "<td><p>";
+    
+    foreach ($jugador1 as $tirada){
+    
+        echo $dados[$tirada];
+    }
+    
+    echo        "</td></p>";
+    echo        "<td><b>$resultado1 puntos</b></td>";
+    echo    "</tr>";
+    
+    echo    "<tr>";
+    echo        "<td><b>Jugador 2</b></td>";
+    echo        "<td><p>";
+    
+    foreach ($jugador2 as $tirada){
+    
+        echo $dados[$tirada];
+    }
+    
+    echo        "</p></td>";
+    echo        "<td><b>$resultado2 puntos</b></td>";
+    echo    "</tr>";
+    
+    
+    echo    "<tr>";
+    echo        "<td><b>Resultado</b></td>";
+    echo        "<td> $ganador</td>";
+    echo    "</tr>";
+    echo "</table>";
+
+}
+
+?>
+
+</body>
+</html>
