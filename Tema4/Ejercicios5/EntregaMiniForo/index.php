@@ -16,28 +16,35 @@
 <?php 
 // PRIMERA APROXIMACIÓN AL MODELO VISTA CONTROLADOR. 
 // Funciones auxiliars Ej- usuarioOK
+session_start();
 include_once 'app/funciones.php';
 
-if ( !isset($_REQUEST['orden']) ){
+if (!isset($_REQUEST['orden']) ){
     include_once 'app/entrada.php';
+    exit();
 } 
-else {
-    switch ($_REQUEST['orden']){
-        
-        case "Entrar":
-            // Chequear usuario
-            if ( isset($_REQUEST['nombre']) && isset($_REQUEST['contraseña']) && 
-                 usuarioOK($_REQUEST['nombre'], $_REQUEST['contraseña'] )) {
-               echo " Bienvenido <b>".$_REQUEST['nombre']."</b><br>";
+
+if($_REQUEST['orden'] == "Entrar"){
+    // Chequear usuario
+    if(isset($_REQUEST['nombre']) && isset($_REQUEST['contraseña']) && 
+               usuarioOK($_REQUEST['nombre'], $_REQUEST['contraseña'] )) {
+               echo " Bienvenido <b>".$_REQUEST['nombre']."</b><br>";               
+               $_SESSION['usuario'] = $_REQUEST['nombre'];
                include_once  'app/comentario.html';
-            }
-            else {
-                include_once 'app/entrada.php';
-                echo " <br> Usuario no válido </br>";
-            }
-            break;
-            
-        case "Nueva opinión":
+               
+    }else {
+            include_once 'app/entrada.php';
+            echo " <br> Usuario no válido </br>";
+    }
+        exit();
+}else{
+    if(!isset($_SESSION['usuario'])){
+        include_once 'app/entrada.php';
+        exit();
+    }   
+
+    switch($_REQUEST['orden']){
+        case "Nueva opinion":
             echo " Nueva opinión <br>";
             include_once  'app/comentario.html';
             break;
@@ -48,8 +55,8 @@ else {
             break;
         case "Terminar": // Formulario inicial
             include_once 'app/entrada.php';
-    }
-    
+            session_destroy();
+    }    
 }
 
 ?>
@@ -57,4 +64,3 @@ else {
 </div>
 </body>
 </html>
-
