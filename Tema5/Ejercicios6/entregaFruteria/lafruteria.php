@@ -5,7 +5,7 @@ session_start();
 if(isset($_SESSION["nombre"])){
     $nombre = $_SESSION["nombre"];
 }else{
-    $nombre = $_GET["nombre"];
+    $nombre = $_POST["nombre"];
     $_SESSION["nombre"] = $nombre;
 }
 
@@ -46,7 +46,7 @@ if (isset ($_POST["terminar"])){
           
     ?>
         <b>BIENVENIDO A LA FRUTERÍA DEL SIGLO XXI</b>
-        <form action="#" method="get">
+        <form action="#" method="post">
           Introduzca su nombre de cliente: <input type="text" name="nombre">
           <input type="submit" name="entrar" value="Iniciar Sesión">
         </form>
@@ -63,8 +63,11 @@ if (isset ($_POST["terminar"])){
           }
 
           echo "</td></tr></table><br>";
+        }
+        
+        if(empty($_POST["terminar"])){
 
-        } 
+        
     ?>
          
         <form action="#" method="post">       
@@ -86,7 +89,7 @@ if (isset ($_POST["terminar"])){
 
     <?php
         
-        if(isset($_POST["terminar"])){
+        }else if(isset($_POST["terminar"])){
 
     ?>
           Muchas gracias por su pedido.
